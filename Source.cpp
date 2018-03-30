@@ -69,7 +69,7 @@ int main() {
 		double dt{ static_cast<double>(t) / 60.0 };
 		std::cout << "\n\n\n";
 		std::cout << "The total time you must spend on reading is: " << t << " minutes" << "=" << dt << " hours\n";
-		std::cout << "With " << b << " min. breaks and 25 min. break after 4 sessions\n";
+		std::cout << "With " << b << " min. breaks and "<< bb << " min. break after 4 sessions\n";
 		std::cout << "Good luck!\n";
 		std::cout << "Do you want to calculate time again? (y/n)";
 		char yn;
