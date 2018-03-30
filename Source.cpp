@@ -62,13 +62,7 @@ int main() {
 		int bb;
 		std::cin >> bb;
 
-		/*
-	////// Starting time///////
-		cout << "Insert what time you are planning on starting reading: ";
-		int st;
-		cin >> st;
-		*/
-
+		
 		int t{ time(s, b, bb) };
 
 
