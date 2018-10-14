@@ -1,81 +1,64 @@
 
 #include <iostream>
 #include <windows.h>
-#include<string>
+#include <string>
+#include "time_func.h"
 
-
-
-int time (int s, int b, int bb) {
-	int t{ 0 };
-	if (s <= 4) {
-		t = 30 * s + b * (s - 1);
-	}
-	if (s > 4 && s <= 8) {
-		t = 30 * s + b * (s - 2) + bb; // (s-2) because we must compensate for the additional term bb (big break)
-	}
-	if (s > 8 && s <= 12) {
-		t = 30 * s + b * (s - 3) + bb * 2;
-	}
-	if (s > 12 && s <= 16) {
-		t = 30 * s + b * (s - 4) + bb * 3;
-	}
-	if (s > 16 && s <= 20) {
-		t = 30 * s + b * (s - 5) + bb * 4;
-	}
-	return t;
-}
-
-void print(std::string s) {
-
-	std::cout << s << '\n';
-}
 
 int main() {
+
 
 	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(h, FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 
-	print( "Welcome!");
-	print("This is a program to calculate the estimated study time");
-	print("using the pomodoro technique.");
-	print("Just input the number of sessions and the size of the breaks.");
-	print("Have fun!\n");
+	std::cout << "Welcome!\n" <<
+		"This is a program to calculate the estimated time for doing tasks\n" <<
+		"using the pomodoro technique with a little twist.\n" <<
+		"Have fun!\n";
 
 	int s;
 	while (true) {
 		while (true) {
-			print("Insert number of sessions (30 min): ");
+			std::cout << "\nInsert number of sessions (30 min): ";
 			std::cin >> s;
 			if (s < 21)
 				break;
-
-			std::cerr << "\nStudy overload!!!\n";
+			std::cerr << "\nOverload!!!\n";
 			std::cerr << "Insert again a realistic number of sessions.\n";
 		}
-	//////small break///////
-		std::cout << "Insert size of the small breaks(min): ";
+		//////small break///////
+		std::cout << "\nInsert size of the small breaks(min)[We recommend 5-10 minutes]: ";
 		int b;
 		std::cin >> b;
 
-	//////big break //////
-		std::cout << "Insert size of the big breaks(min): ";
+		//////big break //////
+		std::cout << "\nInsert size of the big breaks(min)[We recommend 15-20 minutes]: ";
 		int bb;
 		std::cin >> bb;
 
+		//////Psycological factor//////
+		std::cout << "\nFrom 1-5 (1:lowest, 5:highest) how do you feel about doing things today: ";
+		int psy;
+		std::cin >> psy;
 		
-		int t{ time(s, b, bb) };
+		/*
+	////// Starting time///////
+		cout << "Insert what time you are planning on starting reading: ";
+		int st;
+		cin >> st;
+		*/
+		
+		double t{ time(s, b, bb)*pf(psy)};
 
 
-		double dt{ static_cast<double>(t) / 60.0 };
-		std::cout << "\n\n\n";
-		std::cout << "The total time you must spend on reading is: " << t << " minutes" << "=" << dt << " hours\n";
-		std::cout << "With " << b << " min. breaks and "<< bb << " min. break after 4 sessions\n";
-		std::cout << "Good luck!\n";
-		std::cout << "Do you want to calculate time again? (y/n)";
+		double dt{ t / 60.0 };
+		std::cout << "\n\nThe total time you must spend on reading is: " << t << " minutes" << "=" << dt << " hours\n"
+			<< "With " << b << " min. breaks and " << bb << " min. break after 4 sessions\n"
+			<< "Good luck!\n"
+			<< "Do you want to calculate time again? (y/n)";
 		char yn;
 		std::cin >> yn;
 		if (yn == 'n')
 			break;
 	}
-	
 }
