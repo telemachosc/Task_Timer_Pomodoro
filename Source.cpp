@@ -52,8 +52,8 @@ int main() {
 
 
 		double dt{ t / 60.0 };
-		std::cout << "\n\nThe total time you must spend on reading is: " << t << " minutes" << "=" << dt << " hours\n"
-			<< "With " << b << " min. breaks and " << bb << " min. break after 4 sessions\n"
+		std::cout << "\n\nThe total time you must spend on your tasks is: " << t << " minutes" << "=" << dt << " hours\n"
+			<< "With " << b << " min. breaks between sessions and " << bb << " min. break after 4 sessions\n"
 			<< "Good luck!\n"
 			<< "Do you want to calculate time again? (y/n)";
 		char yn;
